@@ -144,7 +144,7 @@ docker-compose up
 
 A arquitetura da solução é composta pelos seguintes componentes:
 
-![Diagrama](https://drive.google.com/file/d/1tyYr2k6zZefrt28cmKBc6rw69NsCR63A/view)
+![Diagrama](https://uploaddeimagens.com.br/images/004/898/246/full/Diagrama_Talent_Pool_Integration.png?1747088368)
 
 ### **Descrição do Fluxo:**
 
@@ -155,3 +155,8 @@ A arquitetura da solução é composta pelos seguintes componentes:
 3. **Kafka Connect**: Recebe os eventos do Debezium e os encaminha para a fila SQS.
 
 4. **AWS SQS**: Armazena as mensagens para serem processadas por consumidores downstream.
+
+## 9. Contato
+
+Para qualquer dúvida ou sugestão, por favor entre em contato com [diovanimotta@gmail.com](mailto:diovanimotta@gmail.com).
+

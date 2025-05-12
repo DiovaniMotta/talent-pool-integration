@@ -16,7 +16,7 @@ public class SQSQueueConfig {
 
     @Bean
     public SqsClient create(){
-        var awsCredentials = AwsBasicCredentials.create(queueConfig.getAccessKey(), queueConfig.getAccessKey());
+        var awsCredentials = AwsBasicCredentials.create(queueConfig.getAccessKey(), queueConfig.getSecretKey());
         return SqsClient.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
                 .region(queueConfig.getRegion())

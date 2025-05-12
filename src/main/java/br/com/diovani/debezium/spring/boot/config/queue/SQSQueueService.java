@@ -30,10 +30,8 @@ public class SQSQueueService implements Publisher<RecordChangeEvent<SourceRecord
                 .build();
 
         var response = client.sendMessage(request);
-        if (response.sdkHttpResponse().isSuccessful()) {
-            System.out.println("Message sent successfully. Message ID: " + response.messageId());
-        } else {
-            System.err.println("Failed to send message. Error: " + response.sdkHttpResponse().statusText().orElse("Unknown error"));
+        if (!response.sdkHttpResponse().isSuccessful()) {
+            throw new IllegalCallerException("Failed to send message to SQS: " + response.sdkHttpResponse().statusText().orElse("Unknown error"));
         }
     }
 }

@@ -1,6 +1,7 @@
 package br.com.diovani.debezium.spring.boot.config.vacancy.management;
 
 import br.com.diovani.debezium.spring.boot.config.DatasourceConfig;
+import br.com.diovani.debezium.spring.boot.utils.FileOffSetUtils;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.File;
 import java.io.IOException;
 
 @Configuration
@@ -21,16 +21,12 @@ public class VacancyManagementDebeziumConnectorConfig {
 
     @Bean(name = "debezium-recruitment-process")
     public io.debezium.config.Configuration create() throws IOException {
-        String tempDir = System.getProperty("java.io.tmpdir");
-        var storageTempFile = new File(tempDir, "debezium_vacancy_management_offsets.dat");
-        if (!storageTempFile.exists()) {
-            storageTempFile.createNewFile();
-        }
+        var storageTempFileName = FileOffSetUtils.create("debezium_vacancy_management_offsets.dat");
         return io.debezium.config.Configuration.create()
                 .with("name", "debezium_vacancy_management_connector")
                 .with("connector.class", "io.debezium.connector.postgresql.PostgresConnector")
                 .with("offset.storage", "org.apache.kafka.connect.storage.FileOffsetBackingStore")
-                .with("offset.storage.file.filename", storageTempFile.getAbsolutePath())
+                .with("offset.storage.file.filename", storageTempFileName)
                 .with("offset.flush.interval.ms", "60000")
                 .with("database.hostname", vacancyManagementDatasourceConfig.getHost())
                 .with("database.port", vacancyManagementDatasourceConfig.getPort())

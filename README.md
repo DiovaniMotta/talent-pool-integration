@@ -1,6 +1,29 @@
 # Talent Pool Integration
 
 Este projeto experimental utiliza **Debezium** e **Kafka Connect** para integrar um banco de dados **PostgreSQL** com o **AWS SQS**, capturando mudanças em tempo real através do mecanismo de **Change Data Capture (CDC)**.
+
+
+## 🛠️ Requisitos necessários para execução do projeto
+
+### 1. Criação da base de dados
+
+Para executar o experimento, é necessário configurar o banco de dados PostgreSQL com as tabelas e dados iniciais. Siga os passos abaixo:
+
+1. **Instale o PostgreSQL**: Certifique-se de que o PostgreSQL está instalado em seu ambiente. Você pode baixá-lo em [https://www.postgresql.org/download/](https://www.postgresql.org/download/).
+
+2. **Crie um banco de dados**: Após a instalação, crie os dois novos de dados para o projeto. Por exemplo:
+
+```bash
+createdb talent_pool_db
+createdb talent_assessments_db
+```
+
+3. **Execute os scripts SQL:** No diretório resources/scripts do repositório, você encontrará os scripts necessários para criar as tabelas e inserir os dados iniciais. Execute-os na ordem apropriada. Por exemplo:
+
+```bash
+psql -d talent_pool_db -f resources/scripts/create-tables-profile-assessments.sql
+psql -d talent_assessments_db -f resources/scripts/create-tables-vacancy-management.sql
+```
 ---
 
 ## 📌 Sumário
